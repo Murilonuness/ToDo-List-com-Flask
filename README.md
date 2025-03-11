@@ -4,7 +4,7 @@ Este é um simples projeto de **To-Do List** desenvolvido com **Flask**, onde vo
 
 ## Preview
 
-![Preview da To-Do List](/backend/static/media/To-Do-List-Preview.jpg)
+![Preview da To-Do List](/static/media/To-Do-List-Preview.jpg)
 
 
 ## Funcionalidades
