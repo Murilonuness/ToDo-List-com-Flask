@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" href="{{ url_for('static', filename='media/checklist.svg') }}" type="image/svg+xml">
+    
+    <meta name="description" content="Gerencie suas tarefas diárias de forma simples e prática com esta To-Do List.">
+    <meta name="keywords" content="to-do list, lista de tarefas, produtividade, tarefas diárias">
+    <meta name="author" content="Murilo Nunes">
+    
+    <meta property="og:title" content="To-Do List">
+    <meta property="og:description" content="Gerencie suas tarefas do dia a dia com facilidade.">
+    <meta property="og:image" content="{{ url_for('static', filename='media/checklist.svg') }}">
+    <meta property="og:url" content="URL_DO_SEU_SITE">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="To-Do List">
+    <meta name="twitter:description" content="Gerencie suas tarefas do dia a dia com facilidade.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='To-Do-List-Preview.jpg') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>To-Do List</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 aria-label="Título: To-Do List">To-Do List</h1>
+
+        <form method="POST">
+            <input type="text" id="tarefaInput" name="tarefaInput" placeholder="Digite suas tarefas" required minlength="1"
+                aria-label="Campo para adicionar uma nova tarefa">
+            <button type="submit" aria-label="Adicionar tarefa">Adicionar</button>
+        </form>
+
+        <ul aria-label="Lista de tarefas">
+            {% for itemAtual in listaTarefa %}
+            <li class="{{ 'done' if itemAtual['feito'] else '' }}">
+                <div class="itemAtual_text">
+                    {{ itemAtual['tarefaInput'] }}
+                </div>
+                <div class="buttons">
+                    <form action="{{ url_for('marcacaoStatus', idTarefa=loop.index0) }}" method="POST"
+                        style="display:inline;">
+                        <button type="submit" class="toggle" aria-label="Alternar status da tarefa">{{ 'Desmarcar' if
+                            itemAtual['feito'] else 'Marcar como feito' }}</button>
+                    </form>
+                    <form action="{{ url_for('excluirTarefa', idTarefa=loop.index0) }}" method="POST"
+                        style="display:inline;">
+                        <button type="submit" class="delete" aria-label="Excluir tarefa">Excluir</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>
